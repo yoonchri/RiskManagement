@@ -1,0 +1,24 @@
+_schema-version: '3.1'
+# ...
+# resources:
+# ...
+# ------------------------------------------------------------
+   - name: risk-management-xsuaa
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: xsuaa
+     service-plan: application
+     path: ./xs-security.json
+
+     config:
+       xsappname: 'risk-management-${space}'
+       role-collections:
+       - name: 'RiskManager-${space}'
+         description: Manage Risks
+         role-template-references:
+         - $XSAPPNAME.RiskManager
+       - name: 'RiskViewer-${space}'
+         description: View Risks
+         role-template-references:
+         - $XSAPPNAME.RiskViewer
